@@ -1,0 +1,57 @@
+@layer base {
+  .font-custom {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+}
+
+@layer utilities {
+  .drop-shadow-glow {
+    text-shadow:
+      0 0 10px rgba(0, 255, 255, 0.6),
+      0 0 20px rgba(0, 255, 255, 0.4);
+  }
+}
+
+.navbar-simple {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 50px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: black;
+  z-index: 1000;
+  color: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.navbar-simple h1 {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-left: 2.2rem;
+}
+
+ul {
+  list-style: none;
+  display: flex;
+  color: white;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-primary);
+}
+
+.nav-links {
+  position: relative;
+}
+
+.nav-item {
+  position: relative;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
