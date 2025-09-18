@@ -1,5 +1,5 @@
 /* Copiado tal cual del original */
-.modal-overlay {
+.modal-noticia-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -14,7 +14,7 @@
   backdrop-filter: blur(8px);
 }
 
-.modal-container {
+.modal-noticia-container {
   background-color: white;
   border-radius: 1rem;
   width: 100%;
@@ -27,12 +27,12 @@
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.modal-container.show {
+.modal-noticia-container.show {
   transform: scale(1) translateY(0);
   opacity: 1;
 }
 
-.modal-close-btn {
+.modal-noticia-close{
   position: fixed;
   top: 1.5rem;
   right: 1.5rem;
@@ -51,23 +51,23 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.modal-close-btn:hover {
+.modal-noticia-close-btn:hover {
   background-color: #f3f4f6;
   transform: scale(1.1);
 }
 
-.modal-header {
+.modal-noticia-header {
   position: relative;
   height: 400px;
 }
 
-.modal-image {
+.modal-noticia-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.modal-gradient {
+.modal-noticia-gradient {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -76,7 +76,7 @@
   background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
 }
 
-.modal-title {
+.modal-noticia-title {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -88,11 +88,11 @@
   line-height: 1.2;
 }
 
-.modal-content {
+.modal-noticia-content {
   padding: 2rem;
 }
 
-.modal-meta {
+.modal-noticia-meta {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -102,7 +102,7 @@
   border-bottom: 1px solid #e5e7eb;
 }
 
-.meta-item {
+.meta-noticia-item {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -110,7 +110,7 @@
   font-size: 0.9rem;
 }
 
-.share-button {
+.share-noticia-button {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -123,36 +123,36 @@
   transition: all 0.2s ease;
 }
 
-.share-button:hover {
+.share-noticia-button:hover {
   background-color: #e5e7eb;
   transform: translateY(-1px);
 }
 
-.modal-body {
+.modal-noticia-body {
   color: #1f2937;
   line-height: 1.8;
   font-size: 1.1rem;
 }
 
-.modal-body p {
+.modal-noticia-body p {
   margin-bottom: 1.5rem;
 }
 
 @media (max-width: 768px) {
-  .modal-title {
+  .modal-noticia-title {
     font-size: 1.75rem;
     padding: 1.5rem;
   }
 
-  .modal-header {
+  .modal-noticia-header {
     height: 300px;
   }
 
-  .modal-content {
+  .modal-noticia-content {
     padding: 1.5rem;
   }
 
-  .modal-meta {
+  .modal-noticia-meta {
     gap: 1rem;
     margin-bottom: 1.5rem;
   }

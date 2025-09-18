@@ -1,5 +1,7 @@
 "use client";
 
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import React, { useEffect } from "react";
 import "./ModalNoticia.css";
 
@@ -34,7 +36,7 @@ const ModalNoticia: React.FC<ModalNoticiaProps> = ({ noticia, onClose }) => {
 	return (
 		<div className="modal-noticia-overlay" onClick={onClose}>
 			<div
-				className="modal-noticia-container"
+				className={`modal-noticia-container ${noticia ? "show" : ""}`}
 				onClick={(e) => e.stopPropagation()}
 				tabIndex={0}
 				role="dialog"
@@ -43,15 +45,16 @@ const ModalNoticia: React.FC<ModalNoticiaProps> = ({ noticia, onClose }) => {
 				<button className="modal-noticia-close" onClick={onClose} aria-label="Cerrar">
 					&times;
 				</button>
-				<div className="modal-noticia-img-wrapper">
+				<div className="modal-noticia-header">
 					<img
-						src={noticia.portada || "/placeholder-noticia.jpg"}
+						src={noticia.portada || "/placeholder.jpg"}
 						alt={noticia.titulo || "Noticia"}
-						className="modal-noticia-img"
+						className="modal-noticia-image"
 					/>
+					<div className="modal-noticia-gradient"></div>
+					<h2 className="modal-noticia-title">{noticia.titulo}</h2>
 				</div>
 				<div className="modal-noticia-content">
-					<h2 className="modal-noticia-title">{noticia.titulo}</h2>
 					<p className="modal-noticia-date">
 						{noticia.fechaPublicacion || noticia.attributes?.fechaPublicacion}
 					</p>
@@ -59,11 +62,10 @@ const ModalNoticia: React.FC<ModalNoticiaProps> = ({ noticia, onClose }) => {
 						{noticia.resumen || noticia.attributes?.resumen}
 					</p>
 					<div className="modal-noticia-body">
-						{/* Renderizar contenido HTML si existe */}
 						{noticia.contenido ? (
-							<div
-								dangerouslySetInnerHTML={{ __html: noticia.contenido }}
-							/>
+							<ReactMarkdown remarkPlugins={[remarkGfm]}>
+							{noticia.contenido}
+							</ReactMarkdown>
 						) : null}
 					</div>
 				</div>

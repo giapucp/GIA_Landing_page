@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { fetchNoticiasRecientes } from "@/app/(inicio)/api/strapi";
 import { Noticia } from "@/app/(inicio)/types/types";
-import "./SeccionActualidad.module.css";
+import styles from "./SeccionActualidad.module.css";
 
 export default function SeccionActualidad() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -107,10 +107,10 @@ export default function SeccionActualidad() {
     );
 
   return (
-    <div className="carousel">
-      <h2 className="titleRecent">Actualidad</h2>
+    <div className={styles.carousel}>
+      <h2 className={styles.titleRecent}>Actualidad</h2>
 
-      <div className="list">
+      <div className={styles.list}>
         {noticias.map((noticia, index) => {
           const isCurrent = index === currentIndex;
           const previewPosition = previewIndices.indexOf(index) + 1;
@@ -119,7 +119,7 @@ export default function SeccionActualidad() {
           return (
             <div
               key={noticia.id}
-              className={`item ${isCurrent ? "active" : ""}`}
+              className={`${styles.item} ${isCurrent ? styles.active : ""}`}
               style={{
                 backgroundImage: `url(${portadaUrl})`,
                 willChange: "transform, opacity, width, height",
@@ -133,17 +133,17 @@ export default function SeccionActualidad() {
                   : previewPosition
               }
             >
-              <div className="content">
-                <div className="title" data-item={index + 1}>
+              <div className={styles.content}>
+                <div className={styles.title} data-item={index + 1}>
                   {noticia.titulo}
                 </div>
-                <div className="des">
+                <div className={styles.des}>
                   {noticia.textoFinal ||
                     (noticia.contenido || "").substring(0, 150) + "..."}
                 </div>
-                <div className="categorias">
+                <div className={styles.categorias}>
                   {noticia.categorias?.map((cat) => (
-                    <span key={cat.id} className="categoria-tag">
+                    <span key={cat.id} className={styles.categoriaTag}>
                       {cat.nombre}
                     </span>
                   ))}
@@ -155,9 +155,9 @@ export default function SeccionActualidad() {
       </div>
 
       {noticias.length > 1 && (
-        <div className="arrows">
+        <div className={styles.arrows}>
           <button
-            className="prev"
+            className={styles.prev}
             onClick={() => handleNavigation("prev")}
             disabled={isAnimating}
             aria-label="Noticia anterior"
@@ -173,14 +173,14 @@ export default function SeccionActualidad() {
             ></div>
           </div>
           <button
-            className="next"
+            className={styles.next}
             onClick={() => handleNavigation("next")}
             disabled={isAnimating}
             aria-label="Siguiente noticia"
           >
             →
           </button>
-          <div className="slide-number">
+          <div className={styles.slideNumber}>
             {`${(currentIndex + 1).toString().padStart(2, "0")}/${noticias.length.toString().padStart(2, "0")}`}
           </div>
         </div>

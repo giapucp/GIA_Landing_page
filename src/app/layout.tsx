@@ -1,14 +1,14 @@
 import "./globals.css";
 import Footer from "@/components/comun/footer/Footer";
-import NavbarSwitcher from "@/components/layout/NavbarSwitcher";
+import Navbar from "@/components/comun/navbar/Navbar";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "GIA - Inicio",
-  description: "Sitio web de GIA",
+  title: "GIA PUCP",
+  description: "Impulsando el desarrollo de proyectos aeroespaciales en el Perú. Grupo fundado en la Pontificia Universidad Católica del Perú.",
 };
 
 export default function RootLayout({
@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className={`${inter.className} min-h-screen flex flex-col`}>
-        <NavbarSwitcher />
+        <Navbar/>
         <main className="flex-1 w-full flex flex-col">{children}</main>
         <Footer />
       </body>

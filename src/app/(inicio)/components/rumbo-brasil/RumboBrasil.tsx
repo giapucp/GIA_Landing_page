@@ -71,7 +71,7 @@ const RumboBrasil: React.FC = () => {
     <div className="page4 flex flex-col items-center">
       <section
         ref={rumboBrasilRef}
-        className="rumbo-a-brasil w-full min-h-[60vh] flex justify-center items-center bg-white text-black"
+        className="rumbo-a-brasil w-full min-h-[50vh] flex justify-center items-center bg-white text-black"
       >
         <div className="rumbo-content">
           <h1 ref={rumboTitleRef} className="rumbo-title">

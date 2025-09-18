@@ -7,6 +7,7 @@ const cache = new Map<string | number, Noticia>();
 
 export async function fetchNoticias(): Promise<Noticia[]> {
   try {
+    console.log("API_URL", API_URL);
     const response = await fetch(`${API_URL}/noticias?populate=*`);
     if (!response.ok) {
       throw new Error(`Error HTTP: ${response.status}`);

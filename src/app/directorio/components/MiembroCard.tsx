@@ -11,7 +11,7 @@ const MiembroCard: React.FC<MiembroCardProps> = ({ imagenSrc, nombre, apellido }
 		<div className="miembro-card">
 			<div className="miembro-imagen-container">
 				<img
-					src={imagenSrc}
+					src={imagenSrc || "/placeholder.jpg"}
 					alt={`Foto de ${nombre}`}
 					className="miembro-imagen"
 				/>

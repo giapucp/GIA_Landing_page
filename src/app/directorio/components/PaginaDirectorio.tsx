@@ -106,7 +106,6 @@ const PaginaDirectorio = () => {
 					</section>
 				))}
 			</div>
-			<Footer />
 		</>
 	);
 };

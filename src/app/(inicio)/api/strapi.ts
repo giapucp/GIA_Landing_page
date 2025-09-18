@@ -21,6 +21,7 @@ function mapCategorias(
 
 export async function fetchNoticiasRecientes(limit = 4): Promise<Noticia[]> {
   try {
+    console.log("API_URL", API_URL);
     const res = await fetch(
       `${API_URL}/noticias?populate=*&sort=fechaPublicacion:desc&pagination[limit]=${limit}`,
     );
