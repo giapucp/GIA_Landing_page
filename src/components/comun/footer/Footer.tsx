@@ -5,7 +5,6 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FaInstagram, FaLinkedinIn } from "react-icons/fa";
 
-
 gsap.registerPlugin(ScrollTrigger);
 
 const Footer: React.FC = () => {
@@ -45,7 +44,9 @@ const Footer: React.FC = () => {
         <div
           className="progress-bar absolute top-0 left-0 h-full w-0"
           ref={progressBarRef}
-          style={{ background: "linear-gradient(90deg, #00f2fe 0%, #4facfe 100%)" }}
+          style={{
+            background: "linear-gradient(90deg, #00f2fe 0%, #4facfe 100%)",
+          }}
         ></div>
       </div>
       <div className="footer-content flex flex-col items-center w-full max-w-screen-xl px-4 md:px-0">

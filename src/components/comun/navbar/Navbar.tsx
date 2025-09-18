@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 
+import "./Navbar.css";
+
 const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -34,9 +36,13 @@ const Navbar: React.FC = () => {
           aria-label="Toggle menu"
         >
           {isMenuOpen ? (
-            <X size={24} className="text-white" style={{ color: '#ffffff' }} />
+            <X size={24} className="text-white" style={{ color: "#ffffff" }} />
           ) : (
-            <Menu size={24} className="text-white" style={{ color: '#ffffff' }} />
+            <Menu
+              size={24}
+              className="text-white"
+              style={{ color: "#ffffff" }}
+            />
           )}
         </button>
 
@@ -80,17 +86,29 @@ const Navbar: React.FC = () => {
                 </Link>
               </li>
               <li className="mobile-nav-item">
-                <Link href="/noticias" className="mobile-nav-link" onClick={closeMenu}>
+                <Link
+                  href="/noticias"
+                  className="mobile-nav-link"
+                  onClick={closeMenu}
+                >
                   <span className="mobile-nav-text">Noticias</span>
                 </Link>
               </li>
               <li className="mobile-nav-item">
-                <Link href="/directorio" className="mobile-nav-link" onClick={closeMenu}>
+                <Link
+                  href="/directorio"
+                  className="mobile-nav-link"
+                  onClick={closeMenu}
+                >
                   <span className="mobile-nav-text">Directorio</span>
                 </Link>
               </li>
               <li className="mobile-nav-item">
-                <Link href="/contacto" className="mobile-nav-link" onClick={closeMenu}>
+                <Link
+                  href="/contacto"
+                  className="mobile-nav-link"
+                  onClick={closeMenu}
+                >
                   <span className="mobile-nav-text">Contáctanos</span>
                 </Link>
               </li>

@@ -1,7 +1,9 @@
+import PaginaNoticias from "./components/PaginaNoticias";
+
 export default function Noticias() {
   return (
     <main>
-      {/* Página de noticias: migrar PaginaNoticias aquí */}
+      <PaginaNoticias />
     </main>
   );
 }
