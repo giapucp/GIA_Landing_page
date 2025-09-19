@@ -1,36 +1,27 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { FaInstagram, FaLinkedinIn } from "react-icons/fa";
 
-gsap.registerPlugin(ScrollTrigger);
+import React, { useEffect, useRef } from "react";
+import { FaInstagram, FaLinkedinIn } from "react-icons/fa";
 
 const Footer: React.FC = () => {
   const progressBarRef = useRef<HTMLDivElement>(null);
   const footerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (progressBarRef.current && footerRef.current) {
-      gsap.to(progressBarRef.current, {
-        width: "100%",
-        ease: "none",
-        scrollTrigger: {
-          trigger: footerRef.current,
-          start: "top bottom",
-          end: "bottom bottom",
-          scrub: true,
-        },
-      });
-    }
-
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.body.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? Math.min(scrollTop / docHeight, 1) : 1;
+      if (progressBarRef.current) {
+        progressBarRef.current.style.width = `${progress * 100}%`;
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    // Llamar una vez para inicializar
+    handleScroll();
     return () => {
-      ScrollTrigger.getAll().forEach((st) => {
-        if (st.trigger === footerRef.current) {
-          st.kill();
-        }
-      });
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
