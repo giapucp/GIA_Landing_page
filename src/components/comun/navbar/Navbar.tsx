@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
+import Image from "next/image";
 
 import "./Navbar.css";
 
@@ -17,15 +18,21 @@ const Navbar: React.FC = () => {
     setIsMenuOpen(false);
   };
 
+  const LOGO_GIA = "/logos/logo-gia-inversion.png";
+
   return (
     <>
       <header className="navbar-simple fixed top-0 w-full bg-black text-white flex justify-between items-center z-50 shadow-lg px-[50px] py-[10px]">
         {/* Logo GIA a la izquierda */}
         <div className="flex-none">
           <Link href="/" className="text-white no-underline">
-            <h1 className="logo-text text-[2rem] font-extrabold m-0 ml-[2.2rem]">
-              GIA
-            </h1>
+            <Image
+              src={LOGO_GIA}
+              alt="GIA"
+              width={60}
+              height={60}
+              unoptimized={true}
+            />
           </Link>
         </div>
 
@@ -68,6 +75,12 @@ const Navbar: React.FC = () => {
               </Link>
             </li>
             <li className="nav-item">
+              <Link href="/donar" className="nav-link">
+                <span className="nav-text">Donar</span>
+                <span className="nav-indicator"></span>
+              </Link>
+            </li>
+            <li className="nav-item">
               <Link href="/contacto" className="nav-link">
                 <span className="nav-text">Contáctanos</span>
                 <span className="nav-indicator"></span>
@@ -101,6 +114,15 @@ const Navbar: React.FC = () => {
                   onClick={closeMenu}
                 >
                   <span className="mobile-nav-text">Directorio</span>
+                </Link>
+              </li>
+              <li className="mobile-nav-item">
+                <Link
+                  href="/donar"
+                  className="mobile-nav-link"
+                  onClick={closeMenu}
+                >
+                  <span className="mobile-nav-text">Donar</span>
                 </Link>
               </li>
               <li className="mobile-nav-item">

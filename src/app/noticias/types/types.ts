@@ -4,14 +4,13 @@ export type Categoria = {
 };
 
 export type Noticia = {
-  id: string | number;
+  id: number | string;
   titulo: string;
   contenido: string;
-  textoFinal?: string;
+  textoFinal: string;
   fechaPublicacion: string;
   portada: string;
   categorias: Categoria[];
-  [key: string]: unknown;
 };
 
 export type YearWithRows = {

@@ -59,7 +59,7 @@ export default function SeccionActualidad() {
     if (noticias.length <= 1) return [] as number[];
 
     const previewIndices: number[] = [];
-    const maxPreviews = Math.min(3, noticias.length - 1);
+    const maxPreviews = Math.min(3, noticias.length);
 
     for (let i = 1; i <= maxPreviews; i++) {
       previewIndices.push((currentIndex + i) % noticias.length);

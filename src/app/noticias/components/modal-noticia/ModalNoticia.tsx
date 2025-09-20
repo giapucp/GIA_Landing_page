@@ -3,17 +3,9 @@
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import React, { useEffect } from "react";
+import Image from "next/image";
 import "./ModalNoticia.css";
-
-interface Noticia {
-	id: string | number;
-	portada?: string;
-	titulo?: string;
-	fechaPublicacion?: string;
-	resumen?: string;
-	contenido?: string;
-	[key: string]: any;
-}
+import { Noticia } from "@/app/(inicio)/types/types";
 
 interface ModalNoticiaProps {
 	noticia: Noticia;
@@ -46,28 +38,33 @@ const ModalNoticia: React.FC<ModalNoticiaProps> = ({ noticia, onClose }) => {
 					&times;
 				</button>
 				<div className="modal-noticia-header">
-					<img
+					<Image
 						src={noticia.portada || "/placeholder.jpg"}
 						alt={noticia.titulo || "Noticia"}
 						className="modal-noticia-image"
+						width={500}
+						height={300}
+						loading="lazy"
+						unoptimized={true}
 					/>
 					<div className="modal-noticia-gradient"></div>
 					<h2 className="modal-noticia-title">{noticia.titulo}</h2>
 				</div>
 				<div className="modal-noticia-content">
 					<p className="modal-noticia-date">
-						{noticia.fechaPublicacion || noticia.attributes?.fechaPublicacion}
+						{noticia.fechaPublicacion || "Fecha no disponible"}
 					</p>
-					<p className="modal-noticia-summary">
-						{noticia.resumen || noticia.attributes?.resumen}
-					</p>
+					
 					<div className="modal-noticia-body">
 						{noticia.contenido ? (
 							<ReactMarkdown remarkPlugins={[remarkGfm]}>
-							{noticia.contenido}
+								{noticia.contenido}
 							</ReactMarkdown>
 						) : null}
 					</div>
+					<p className="modal-noticia-summary">
+						{noticia.textoFinal || "Resumen no disponible"}
+					</p>
 				</div>
 			</div>
 		</div>

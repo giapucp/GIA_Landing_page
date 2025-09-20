@@ -1,11 +1,7 @@
 import "./globals.css";
 import Footer from "@/components/comun/footer/Footer";
-import Navbar from "@/components/comun/navbar/Navbar";
 import NavbarSwitcher from "@/components/layout/NavbarSwitcher";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "GIA PUCP",
@@ -19,7 +15,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es">
-      <body className={`${inter.className} min-h-screen flex flex-col`}>
+      <body className={`min-h-screen flex flex-col`}>
         <NavbarSwitcher/>
         <main className="flex-1 w-full flex flex-col">{children}</main>
         <Footer />

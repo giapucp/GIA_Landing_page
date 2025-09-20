@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Image from 'next/image';
 import "./RumboBrasil.css";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -88,11 +89,14 @@ const RumboBrasil: React.FC = () => {
           </p>
         </div>
         <div className="rumbo-image-container">
-          <img
+          <Image
             ref={rumboImageRef}
             src="/brasil-edition.png"
             alt="LASC Sixth Edition Rocket-Satellite"
             className="rumbo-image"
+            loading="lazy"
+            width={500}
+            height={500}
           />
         </div>
       </section>

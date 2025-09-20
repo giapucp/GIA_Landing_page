@@ -3,7 +3,6 @@ import {
   CategoriaResponse,
   Noticia,
   NoticiaResponse,
-  Portada,
 } from "../types/types";
 
 

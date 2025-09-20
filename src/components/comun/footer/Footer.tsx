@@ -3,6 +3,7 @@
 
 import React, { useEffect, useRef } from "react";
 import { FaInstagram, FaLinkedinIn } from "react-icons/fa";
+import Image from "next/image";
 
 const Footer: React.FC = () => {
   const progressBarRef = useRef<HTMLDivElement>(null);
@@ -47,10 +48,13 @@ const Footer: React.FC = () => {
             <p className="text-4xl font-bold text-white font-barlow-condensed leading-none mb-8">
               GIA
             </p>
-            <img
+            <Image
               src="/logos/logo-pucp.png"
               alt="PUCP Logo"
               className="w-[150px] h-auto filter brightness-0 invert"
+              loading="lazy"
+              width={150}
+              height={150}
             />
           </div>
           {/* COLUMNA 2: Contacto + Detalles */}

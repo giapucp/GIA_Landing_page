@@ -1,5 +1,3 @@
-import NavbarAnimado from "./components/navbar/NavbarAnimado";
-
 export default function InicioLayout({
   children,
 }: {

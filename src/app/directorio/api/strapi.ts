@@ -1,4 +1,4 @@
-import { API_URL, getImageUrl } from "../../api/strapiBase";
+import { API_URL, getImageUrl, StrapiData } from "../../api/strapiBase";
 import { Miembro, MiembroResponse } from "../types/types";
 
 
@@ -12,7 +12,7 @@ export async function fetchMiembros(): Promise<Miembro[]> {
         id: miembro.id,
         nombre: miembro.Nombres || "Sin nombre",
         apellidoPaterno: miembro.ApellidoPaterno || "Sin apellido",
-        foto: getImageUrl(miembro.foto),
+        foto: miembro.foto?.data?.attributes?.url ? getImageUrl(miembro.foto as StrapiData) : "",
         area: {
           id: miembro.area_gia!.id,
           nombre: miembro.area_gia!.NombreArea || "Sin área",

@@ -7,6 +7,10 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Menu, X } from "lucide-react";
 import "./NavbarAnimado.css";
 
+import {Space_Mono} from "next/font/google";
+
+const spaceMono = Space_Mono({ style: "normal", subsets: ["latin"], weight: "700" });
+
 gsap.registerPlugin(ScrollTrigger);
 
 function NavbarAnimado() {
@@ -30,7 +34,7 @@ function NavbarAnimado() {
     const ctx = gsap.context(() => {
       gsap.set(middleLogoRef.current, {
         scale: 6,
-        y: 300,
+        y: 200,
         x: 0,
       });
 
@@ -58,7 +62,7 @@ function NavbarAnimado() {
         middleLogoRef.current,
         { x: 0 },
         {
-          x: window.innerWidth <= 768 ? "-34vw" : "-42vw",
+          x: window.innerWidth <= 768 ? "-34vw" : "-40vw",
           ease: "power1.inOut",
           scrollTrigger: {
             trigger: ".page1",
@@ -104,10 +108,14 @@ function NavbarAnimado() {
         <div className="middle-logo absolute left-0 w-full flex justify-center pointer-events-none z-10">
           <h1
             ref={middleLogoRef}
-            className="text-2xl font-bold m-0"
-            style={{ transform: "scale(6) translateY(300px)" }}
+            style={{ transform: "scale(6) translateY(10px)" }}
           >
-            GIA
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img 
+              src="/logos/logo-gia-inversion.png" 
+              alt="GIA"
+              style={{ width: "10vw", maxWidth: "60px", height: "auto"}} />
+
           </h1>
         </div>
 
@@ -140,6 +148,12 @@ function NavbarAnimado() {
             <li className="nav-item">
               <Link href="/directorio" className="nav-link">
                 <span className="nav-text">Directorio</span>
+                <span className="nav-indicator"></span>
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link href="/donar" className="nav-link">
+                <span className="nav-text">Donar</span>
                 <span className="nav-indicator"></span>
               </Link>
             </li>
@@ -180,6 +194,15 @@ function NavbarAnimado() {
               </li>
               <li className="mobile-nav-item">
                 <Link
+                  href="/donar"
+                  className="mobile-nav-link"
+                  onClick={closeMenu}
+                >
+                  <span className="mobile-nav-text">Donar</span>
+                </Link>
+              </li>
+              <li className="mobile-nav-item">
+                <Link
                   href="/contacto"
                   className="mobile-nav-link"
                   onClick={closeMenu}
@@ -195,8 +218,8 @@ function NavbarAnimado() {
       </header>
 
       <div className="page1">
-        <h2>GRUPO DE INGENIERÍA</h2>
-        <h2>AEROESPACIAL</h2>
+        <h2 className={`${spaceMono.className}`}>GRUPO DE INGENIERIA</h2>
+        <h2 className={`${spaceMono.className}`}>AEROESPACIAL</h2>
       </div>
     </div>
   );

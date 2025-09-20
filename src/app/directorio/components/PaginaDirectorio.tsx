@@ -2,7 +2,6 @@
 
 import { useEffect, useState, useRef } from "react";
 import Navbar from "@/components/comun/navbar/Navbar";
-import Footer from "@/components/comun/footer/Footer";
 import MiembroCard from "./MiembroCard";
 import { fetchMiembros } from "../api/strapi";
 import { Miembro } from "../types/types";

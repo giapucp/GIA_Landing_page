@@ -260,7 +260,8 @@ li:hover {
 
 /* Estilos para .page1 */
 .page1 {
-  height: 100vh;
+  height: 80vh;
+  max-height: 600px;
   width: 100%;
   position: relative;
   overflow: hidden;
@@ -273,6 +274,13 @@ li:hover {
   align-items: center;
   text-align: center;
   padding-top: 340px;
+}
+
+.logo-inicio {
+  width: 20px;
+  height: auto;
+  margin-bottom: 20px;
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.6));
 }
 
 .page1::before {
@@ -298,12 +306,9 @@ li:hover {
 }
 
 .page1 h2 {
-  font-family: var(--font-display);
-  font-size: 3rem;
-  font-weight: 700;
+  font-size: 2.3rem;
   z-index: 1;
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
-  letter-spacing: -0.02em;
+  letter-spacing: 0.01em;
 }
 
 .page1 p {

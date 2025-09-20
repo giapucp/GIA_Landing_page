@@ -1,5 +1,5 @@
 import TarjetaNoticia from "./TarjetaNoticia";
-import type { Noticia } from "../../types/types";
+import { Noticia } from "@/app/(inicio)/types/types";
 
 type YearWithRows = {
 	year: string;

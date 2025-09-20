@@ -12,14 +12,14 @@ export type NoticiaResponse = {
   textoFinal?: string;
   fechaPublicacion?: string;
   portada?: Portada;
-  categoria?: any[];
+  categoria?: CategoriaResponse[];
   attributes?: {
     titulo?: string;
     contenido?: string;
     textoFinal?: string;
     fechaPublicacion?: string;
     portada?: Portada;
-    categoria?: any[];
+    categoria?: CategoriaResponse[];
   };
 };
 

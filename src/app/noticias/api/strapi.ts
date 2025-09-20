@@ -1,7 +1,58 @@
 import type { Noticia, Categoria } from "../types/types";
 
 
-import { API_URL, BASE_URL, getImageUrl } from "../../api/strapiBase";
+import { API_URL, getImageUrl } from "../../api/strapiBase";
+
+// Raw Strapi structure for a category when populated
+interface StrapiPopulatedCategoryData {
+  id: number;
+  attributes: {
+    tipo: string;
+  };
+}
+
+// Raw Strapi structure for an image/media when populated
+interface StrapiPopulatedImageData {
+  data: {
+    id: number;
+    attributes: {
+      url: string;
+    };
+  };
+}
+
+// Raw Strapi structure for a news item with populated fields
+interface StrapiNoticiaDataAttributes {
+  titulo: string;
+  contenido: string;
+  textoFinal: string;
+  fechaPublicacion: string;
+  portada?: StrapiPopulatedImageData;
+  categoria?: { data: StrapiPopulatedCategoryData[] };
+}
+
+interface StrapiNoticiaItem {
+  id: number;
+  attributes: StrapiNoticiaDataAttributes;
+}
+
+// For getCategories
+interface RawCategoryItem {
+  id: number;
+  attributes?: { tipo: string };
+  tipo?: string;
+}
+
+// For fetchNoticiasRecientes
+interface StrapiFlattenedNoticiaItem {
+  id: number;
+  titulo: string;
+  contenido: string;
+  textoFinal: string;
+  fechaPublicacion: string;
+  portada?: { url: string };
+  categoria?: Array<{ id: number; tipo: string }>;
+}
 
 const cache = new Map<string | number, Noticia>();
 
@@ -13,7 +64,7 @@ export async function fetchNoticias(): Promise<Noticia[]> {
       throw new Error(`Error HTTP: ${response.status}`);
     }
     const { data } = await response.json();
-    return data.map((item: any) => {
+    return data.map((item: StrapiNoticiaItem) => {
       const attributes = item.attributes || item;
       return {
         id: item.id,
@@ -33,10 +84,12 @@ export async function fetchNoticias(): Promise<Noticia[]> {
 }
 
 
-function getCategories(categoria: any): Categoria[] {
-  const categoriasData = categoria?.data || categoria;
-  if (!Array.isArray(categoriasData)) return [];
-  return categoriasData.map((cat: any) => ({
+function getCategories(categoria: { data: RawCategoryItem[] } | RawCategoryItem[] | undefined): Categoria[] {
+  if (categoria === undefined) {
+    return [];
+  }
+  const categoriasData = Array.isArray(categoria) ? categoria : categoria.data;
+  return categoriasData.map((cat: RawCategoryItem) => ({
     id: cat.id,
     nombre: cat.attributes?.tipo || cat.tipo || "Sin categoría",
   }));
@@ -73,7 +126,7 @@ export async function fetchNoticiasRecientes(limit = 4): Promise<Noticia[]> {
     );
     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
     const { data } = await response.json();
-    return data.map((noticia: any) => ({
+    return data.map((noticia: StrapiFlattenedNoticiaItem) => ({
       id: noticia.id,
       titulo: noticia.titulo || "Sin título",
       contenido: noticia.contenido || "",
@@ -83,7 +136,7 @@ export async function fetchNoticiasRecientes(limit = 4): Promise<Noticia[]> {
         ? noticia.portada.url
         : "/placeholder-noticia.jpg",
       categorias:
-        noticia.categoria?.map((cat: any) => ({
+        noticia.categoria?.map((cat: { id: number; tipo: string }) => ({
           id: cat.id,
           nombre: cat.tipo || "Sin categoría",
         })) || [],

@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { Copy, Share2, MessageCircle } from "lucide-react";
+import Image from "next/image";
 
 export default function DonatePage() {
 
@@ -59,6 +60,7 @@ export default function DonatePage() {
     if (typeof navigator !== "undefined" && navigator.share) {
       try {
         await navigator.share(shareData);
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (err) {
         console.log("Compartir cancelado o no soportado");
         // Fallback: copiar URL al portapapeles
@@ -91,10 +93,13 @@ export default function DonatePage() {
     <main className="min-h-screen bg-gradient-to-br from-green-100 to-green-300 flex items-center justify-center p-4 pt-24">
       <section className="w-full max-w-2xl bg-gradient-to-br from-green-50 to-green-200 rounded-3xl shadow-2xl overflow-hidden">
         {/* Header de la sección */}
-        <div className="bg-gradient-to-br from-green-100 to-green-200 px-4 py-2 md:px-5 md:py-3 text-center border-b border-green-100">
+        <div className="px-4 py-2 md:px-5 md:py-3 text-center border-b border-green-100">
           <h1 className="text-3xl md:text-4xl font-black text-transparent bg-clip-text bg-green-700 mb-1 tracking-tight font-barlow-condensed">
-            Apoya Nuestra Causa
+            Construyamos este camino juntos
           </h1>
+          <h2 className="text-lg md:text-xl text-green-800 font-medium">
+            Sé parte de nuestra misión impulsando la ingeniería aeroespacial
+          </h2>
         </div>
 
         {/* Tarjeta Plin única */}
@@ -102,11 +107,13 @@ export default function DonatePage() {
           <article className="w-full bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-6 border border-green-200 shadow-sm">
             <div className="flex flex-col items-center gap-2">
               <span className="text-green-700 font-bold text-lg md:text-xl mb-2">Plin</span>
-              <div className="w-64 h-64 md:w-80 md:h-80 rounded-xl overflow-hidden bg-white p-4 border-2 border-green-200 grid place-items-center shadow-sm mb-2">
-                <img 
+              <div className="w-64 h-64 md:w-50 md:h-50 rounded-xl overflow-hidden bg-white p-4 border-2 border-green-200 grid place-items-center shadow-sm mb-2">
+                <Image
                   src={PLIN_QR} 
                   alt="QR Plin" 
-                  className="w-full h-full object-contain"
+                  width={200}
+                  height={200}
+                  unoptimized={true}
                 />
               </div>
               <button
@@ -129,7 +136,7 @@ export default function DonatePage() {
               className="w-full sm:w-48 flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-green-500 hover:bg-green-600 text-white font-medium transition-colors shadow-lg cursor-pointer"
               type="button"
             >
-              <Share2 size={18} />
+              <Share2 size={35} />
               Compartir página
             </button>
 
@@ -138,14 +145,10 @@ export default function DonatePage() {
               className="w-full sm:w-48 flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-green-500 hover:bg-green-600 text-white font-medium transition-colors shadow-lg cursor-pointer"
               type="button"
             >
-              <MessageCircle size={18} />
+              <MessageCircle size={35} />
               Compartir por WhatsApp
             </button>
           </div>
-
-          <p className="text-center text-sm text-gray-700 mt-4">
-            Tu apoyo hace la diferencia. ¡Gracias por considerar una donación por Plin! 💝
-          </p>
         </div>
 
       </section>
