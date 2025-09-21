@@ -11,7 +11,7 @@ interface TarjetaNoticiaProps {
 const TarjetaNoticia: React.FC<TarjetaNoticiaProps> = ({ noticia, onClick }) => {
   return (
     <div
-      className="tarjeta-noticia"
+      className="tarjeta-noticia cursor-pointer"
       onClick={onClick}
       tabIndex={0}
       role="button"
