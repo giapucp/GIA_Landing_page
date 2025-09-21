@@ -143,7 +143,7 @@ const ListaNoticias = () => {
 
   return (
     <div className="container-noticias-wrapper w-full">
-      <div className="container-noticias-wrapper-contenido max-w-[1200px] mx-auto sm:px-6 md:py-16 mt-16 md:mt-20">
+      <div className="container-noticias-wrapper-contenido max-w-[1200px] mx-auto sm:px-6 md:py-16 mt-8 md:mt-20">
         <div className="container-noticias-titulo flex items-center gap-3 mb-8 md:mb-12">
           <Newspaper size={40} className="text-gray-800" />
           <h1 className="text-6xl font-bold text-gray-800">Noticias</h1>

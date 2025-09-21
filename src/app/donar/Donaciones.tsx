@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { Copy, Share2, MessageCircle } from "lucide-react";
 import Image from "next/image";
+import { copyToClipboard, sharePage as sharePageUtil, shareWhatsApp } from "./utils/clipboard";
 
 export default function DonatePage() {
 
@@ -21,73 +22,29 @@ export default function DonatePage() {
     }
   }, [copied.at]);
 
-  async function copyNumber(text: string, which: string) {
-    if (!text) return;
-    try {
-      if (typeof navigator !== "undefined" && navigator.clipboard && navigator.clipboard.writeText) {
-        await navigator.clipboard.writeText(text);
-        setCopied({ which, at: Date.now() });
-      } else {
-        // fallback para navegadores más antiguos
-        if (typeof document !== "undefined") {
-          const ta = document.createElement("textarea");
-          ta.value = text;
-          ta.style.position = "fixed";
-          ta.style.left = "-9999px";
-          document.body.appendChild(ta);
-          ta.select();
-          try {
-            document.execCommand("copy");
-            setCopied({ which, at: Date.now() });
-          } catch (err) {
-            console.warn("Error copiando:", err);
-          }
-          ta.remove();
-        }
-      }
-    } catch (e) {
-      console.warn("Error en copyNumber:", e);
+  async function handleCopyNumber(text: string, which: string) {
+    const success = await copyToClipboard(text);
+    if (success) {
+      setCopied({ which, at: Date.now() });
     }
   }
 
-  async function sharePage() {
+  async function handleSharePage() {
     const shareData = {
       title: "Apoya nuestra causa",
       text: "Puedes hacer tu donación fácilmente por Yape o Plin",
       url: window.location.href
     };
-
-    if (typeof navigator !== "undefined" && navigator.share) {
-      try {
-        await navigator.share(shareData);
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      } catch (err) {
-        console.log("Compartir cancelado o no soportado");
-        // Fallback: copiar URL al portapapeles
-        if (navigator.clipboard) {
-          await navigator.clipboard.writeText(window.location.href);
-          alert("Enlace copiado al portapapeles");
-        }
-      }
-    } else {
-      // Fallback: copiar URL
-      if (navigator.clipboard) {
-        await navigator.clipboard.writeText(window.location.href);
-        alert("Enlace copiado al portapapeles");
-      }
+    const shared = await sharePageUtil(shareData);
+    if (!shared) {
+      alert("Enlace copiado al portapapeles");
     }
   }
 
-  function shareWhatsApp() {
-    const text = `¡Hola! Te comparto esta página para hacer donaciones fácilmente por Plin: ${window.location.href}`;
-    const encoded = encodeURIComponent(text);
-    const url = `https://api.whatsapp.com/send?text=${encoded}`;
-    if (typeof window !== "undefined") {
-      window.open(url, "_blank");
-    }
+  function handleShareWhatsApp() {
+    const text = "¡Hola! Te comparto esta página para hacer donaciones fácilmente por Plin:";
+    shareWhatsApp(text, window.location.href);
   }
-
-
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-green-100 to-green-300 flex items-center justify-center p-4 pt-24">
@@ -117,7 +74,7 @@ export default function DonatePage() {
                 />
               </div>
               <button
-                onClick={() => copyNumber(PLIN_NUMBER, "plin")}
+                onClick={() => handleCopyNumber(PLIN_NUMBER, "plin")}
                 className="w-full flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-white border-2 border-green-200 hover:bg-green-50 transition-all duration-200 font-medium text-green-800 cursor-pointer"
                 type="button"
               >
@@ -132,7 +89,7 @@ export default function DonatePage() {
         <div className="bg-gradient-to-br from-green-100 to-green-200 p-4 md:p-6 border-t border-green-100 mt-0">
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mt-0">
             <button
-              onClick={sharePage}
+              onClick={handleSharePage}
               className="w-full sm:w-48 flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-green-500 hover:bg-green-600 text-white font-medium transition-colors shadow-lg cursor-pointer"
               type="button"
             >
@@ -141,7 +98,7 @@ export default function DonatePage() {
             </button>
 
             <button
-              onClick={shareWhatsApp}
+              onClick={handleShareWhatsApp}
               className="w-full sm:w-48 flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-green-500 hover:bg-green-600 text-white font-medium transition-colors shadow-lg cursor-pointer"
               type="button"
             >
