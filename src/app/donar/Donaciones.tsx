@@ -8,7 +8,7 @@ import { copyToClipboard, sharePage as sharePageUtil, shareWhatsApp } from "./ut
 export default function DonatePage() {
 
   const YAPE_PLIN_QR = "/qr_pagos/qr_plin.jpg";
-
+  const PLIN_NUMBER = "+51 963065928";
   const [copied, setCopied] = useState<{ which: string; at: number | null }>({ which: "", at: null });
 
   // Limpiar estado de "copiado" después de 2 segundos
@@ -21,7 +21,7 @@ export default function DonatePage() {
     }
   }, [copied.at]);
 
-  async function handleCopyNumber(text: string, which: string) {
+  async function copyNumber(text: string, which: string) {
     const success = await copyToClipboard(text);
     if (success) {
       setCopied({ which, at: Date.now() });
@@ -73,6 +73,14 @@ export default function DonatePage() {
                 />
               </div>
             </div>
+            <button
+                onClick={() => copyNumber(PLIN_NUMBER, "plin")}
+                className="w-full flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-white border-2 border-green-200 hover:bg-green-50 transition-all duration-200 font-medium text-green-800 cursor-pointer"
+                type="button"
+              >
+                <Copy size={16} />
+                {copied.which === "plin" && copied.at ? "¡Copiado!" : "Copiar número"}
+              </button>
           </article>
         </div>
 
