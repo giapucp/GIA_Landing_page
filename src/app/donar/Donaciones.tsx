@@ -9,6 +9,9 @@ export default function DonatePage() {
 
   const YAPE_PLIN_QR = "/qr_pagos/qr_plin.jpg";
   const PLIN_NUMBER = "+51 963065928";
+  const SCOTIABANK_ACCOUNT = "1130276973";
+  const SCOTIABANK_CCI = "00901220113027697367";
+  
   const [copied, setCopied] = useState<{ which: string; at: number | null }>({ which: "", at: null });
 
   // Limpiar estado de "copiado" después de 2 segundos
@@ -58,29 +61,69 @@ export default function DonatePage() {
           </h2>
         </div>
 
-        {/* Tarjeta Plin única */}
-        <div className="p-4 md:p-6 flex flex-col items-center justify-center">
-          <article className="w-full bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-6 border border-green-200 shadow-sm">
-            <div className="flex flex-col items-center gap-2">
-              <span className="text-green-700 font-bold text-lg md:text-xl mb-2">Yape/Plin</span>
-              <div className="w-64 h-64 md:w-50 md:h-50 rounded-xl overflow-hidden bg-white p-4 border-2 border-green-200 grid place-items-center shadow-sm mb-2">
-                <Image
-                  src={YAPE_PLIN_QR}
-                  alt="QR Yape/Plin"
-                  width={200}
-                  height={200}
-                  unoptimized={true}
-                />
-              </div>
+        {/* Tarjetas QR y Cuenta Bancaria en layout responsivo */}
+        <div className="p-4 md:p-6 flex flex-col md:flex-row items-center justify-center gap-6">
+          {/* Tarjeta QR */}
+          <article className="w-full md:w-1/2 min-h-[410px] bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-6 border border-green-200 shadow-sm flex flex-col items-center justify-between">
+            <span className="text-green-700 font-bold text-lg md:text-xl mb-4">Yape/Plin</span>
+            <div className="w-64 h-64 md:w-50 md:h-50 rounded-xl overflow-hidden bg-white p-2 border-2 border-green-200 grid place-items-center shadow-sm mb-4">
+              <Image
+                src={YAPE_PLIN_QR}
+                alt="QR Yape/Plin"
+                width={200}
+                height={200}
+                unoptimized={true}
+              />
             </div>
             <button
-                onClick={() => copyNumber(PLIN_NUMBER, "plin")}
-                className="w-full flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-white border-2 border-green-200 hover:bg-green-50 transition-all duration-200 font-medium text-green-800 cursor-pointer"
+              onClick={() => copyNumber(PLIN_NUMBER, "plin")}
+              className="w-full flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-white border-2 border-green-200 hover:bg-green-50 transition-all duration-200 font-medium text-green-800 cursor-pointer"
+              type="button"
+            >
+              <Copy size={16} />
+              {copied.which === "plin" && copied.at ? "¡Copiado!" : "Copiar número"}
+            </button>
+          </article>
+          
+          {/* Tarjeta Cuenta Scotiabank */}
+          <article className="w-full md:w-1/2 min-h-[410px] bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-6 border border-green-200 shadow-sm flex flex-col items-center justify-between">
+            <span className="text-green-700 font-bold text-lg md:text-xl mb-4">Cuenta Scotiabank</span>
+            <div className="w-full max-w-xs rounded-xl bg-white p-4 border-2 border-green-200 shadow-sm mb-4 flex flex-col justify-center items-center">
+              <div className="flex flex-col items-center gap-4 w-full">
+                {/* Número de cuenta */}
+                <div className="text-center">
+                  <span className="text-green-600 font-semibold text-sm block mb-1">Nº de Cuenta</span>
+                  <span className="text-green-900 font-mono text-lg tracking-wider select-all">{SCOTIABANK_ACCOUNT}</span>
+                </div>
+                
+                {/* CCI */}
+                <div className="text-center">
+                  <span className="text-green-600 font-semibold text-sm block mb-1">CCI</span>
+                  <span className="text-green-900 font-mono text-sm tracking-wider select-all break-words">{SCOTIABANK_CCI}</span>
+                </div>
+              </div>
+            </div>
+            
+            {/* Botones para copiar */}
+            <div className="w-full flex flex-col gap-2">
+              <button
+                onClick={() => copyNumber(SCOTIABANK_ACCOUNT, "cuenta")}
+                className="w-full flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-white border-2 border-green-200 hover:bg-green-50 transition-all duration-200 font-medium text-green-800 cursor-pointer text-sm"
                 type="button"
               >
                 <Copy size={16} />
-                {copied.which === "plin" && copied.at ? "¡Copiado!" : "Copiar número"}
+                {copied.which === "cuenta" && copied.at ? "¡Copiado!" : "Copiar Nº Cuenta"}
               </button>
+              
+              <button
+                onClick={() => copyNumber(SCOTIABANK_CCI, "cci")}
+                className="w-full flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-white border-2 border-green-200 hover:bg-green-50 transition-all duration-200 font-medium text-green-800 cursor-pointer text-sm"
+                type="button"
+              >
+                <Copy size={16} />
+                {copied.which === "cci" && copied.at ? "¡Copiado!" : "Copiar CCI"}
+              </button>
+            </div>
           </article>
         </div>
 
