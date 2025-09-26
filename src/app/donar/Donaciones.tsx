@@ -61,7 +61,7 @@ export default function DonatePage() {
           </h2>
         </div>
 
-        {/* Tarjetas QR y Cuenta Bancaria en layout responsivo */}
+        {/* Tarjetas QR y Cuenta Bancaria*/}
         <div className="p-4 md:p-6 flex flex-col md:flex-row items-center justify-center gap-6">
           {/* Tarjeta QR */}
           <article className="w-full md:w-1/2 min-h-[410px] bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-6 border border-green-200 shadow-sm flex flex-col items-center justify-between">
